@@ -1,0 +1,43 @@
+.table {
+  
+        margin-top: 3rem;
+    
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    padding: 1rem 1rem;
+    height: 200px;
+
+    
+
+    div {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        padding: 0 1rem;
+
+        .inputContainer {
+            display: flex;
+            flex-direction: column;
+    
+            height: 50px;
+        }
+
+    }
+
+    button {
+        background-color: var(--primary-mint);
+        border: none;
+        color: var(--primary-blue);
+        border-radius: 0.5rem;
+        height: 1.5rem;
+
+        transition: 0.2s linear transform;
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+}

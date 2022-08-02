@@ -1,0 +1,19 @@
+.userstable{
+    width: 90%;
+
+    thead {
+        text-align: left;
+    }
+
+
+    tbody{
+
+        tr {
+
+            transition: 0.1s linear transform;
+            &:hover {
+                transform: translateX(1rem);
+            } 
+        }
+    }
+}
