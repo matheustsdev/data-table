@@ -1,19 +1,26 @@
-.userstable{
-    width: 90%;
+.userstable {
+  width: 75%;
 
-    thead {
-        text-align: left;
+  thead {
+    text-align: left;
+  }
+
+  tbody {
+    tr {
+      transition: 0.1s linear transform;
+      &:hover {
+        transform: translateX(1rem);
+      }
     }
+  }
+}
 
+.tableHeader {
+  display: flex;
 
-    tbody{
+  padding: 1rem 0;
 
-        tr {
-
-            transition: 0.1s linear transform;
-            &:hover {
-                transform: translateX(1rem);
-            } 
-        }
-    }
+  button {
+    margin-left: 2rem;
+  }
 }
