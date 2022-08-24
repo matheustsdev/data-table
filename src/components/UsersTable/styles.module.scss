@@ -1,26 +1,36 @@
 .userstable {
-  width: 75%;
+  padding: 1.25rem 3rem;
+  background-color: var(--clear-blue);
+  border-radius: 1rem;
 
-  thead {
-    text-align: left;
-  }
+  table {
+    width: 850px;
+    border-collapse: collapse;
 
-  tbody {
-    tr {
-      transition: 0.1s linear transform;
-      &:hover {
-        transform: translateX(1rem);
+    thead {
+      text-align: left;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      color: var(--highlight-orange);
+      font-size: 1rem;
+
+      tr {
+        border-bottom: 1px dashed var(--highlight-orange);
+
+        th {
+          padding: 1.25rem 0;
+        }
       }
     }
-  }
-}
+    tbody {
+      tr {
+        border-bottom: 1px dashed var(--highlight-orange);
 
-.tableHeader {
-  display: flex;
-
-  padding: 1rem 0;
-
-  button {
-    margin-left: 2rem;
+        td {
+          padding: 0.75rem 0;
+        }
+      }
+    }
   }
 }

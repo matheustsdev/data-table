@@ -1,5 +1,6 @@
 import { UserProps } from '../../hook/useUsers';
 import { AddUserButton } from '../AddUserButton';
+import { Checkbox } from '../Checkbox';
 import styles from './styles.module.scss';
 
 interface UsersTableProps {
@@ -7,15 +8,31 @@ interface UsersTableProps {
 }
 
 export function UsersTable({ users }: UsersTableProps) {
+  function handleActiveAll() {
+    const checkboxs: NodeListOf<HTMLDListElement> = document.querySelectorAll('.checkbox div');
+
+    checkboxs.forEach((el) => el.toggleAttribute('active', true));
+  }
+
+  function handleInactiveAll() {
+    const checkboxs: NodeListOf<HTMLDListElement> = document.querySelectorAll('.checkbox div');
+
+    checkboxs.forEach((el) => el.toggleAttribute('active', false));
+  }
+
   return (
-    <>
-      <div className={styles.tableHeader}>
-        <h2>Usuários</h2>
-        <AddUserButton />
-      </div>
-      <table className={styles.userstable}>
+    <div className={styles.userstable}>
+      <table>
         <thead>
           <tr>
+            <th>
+              <Checkbox
+                onActive={() => handleActiveAll()}
+                onInactive={() => {
+                  handleInactiveAll();
+                }}
+              />
+            </th>
             <th>ID</th>
             <th>Nome</th>
             <th>CPF</th>
@@ -29,6 +46,9 @@ export function UsersTable({ users }: UsersTableProps) {
             users.map((user) => {
               return (
                 <tr key={user.id}>
+                  <td className="checkbox">
+                    <Checkbox />
+                  </td>
                   <td>{user.id}</td>
                   <td>{user.name}</td>
                   <td>{user.cpf}</td>
@@ -40,6 +60,6 @@ export function UsersTable({ users }: UsersTableProps) {
             })}
         </tbody>
       </table>
-    </>
+    </div>
   );
 }

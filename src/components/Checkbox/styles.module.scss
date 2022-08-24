@@ -1,0 +1,41 @@
+@keyframes activing {
+  0% {
+    background-color: transparent;
+    font-size: 0rem;
+  }
+
+  60% {
+    font-size: 1.25rem;
+  }
+
+  100% {
+    background-color: var(--highlight-orange);
+    font-size: 0.75rem;
+  }
+}
+
+.inactive {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  border-radius: 0.25rem;
+  border: 1px solid var(--highlight-orange);
+
+  cursor: pointer;
+}
+
+.active {
+  width: 1.25rem;
+  height: 1.25rem;
+
+  border-radius: 0.25rem;
+
+  color: var(--clear-blue);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  animation: activing 0.2s linear forwards;
+}
