@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { BsPlus } from 'react-icons/bs';
+import { FiUserPlus } from 'react-icons/fi';
 import Modal from 'react-modal';
 import { UserProps, useUsers } from '../../hook/useUsers';
 import styles from './styles.module.scss';
@@ -31,43 +31,9 @@ export function AddUserButton() {
   return (
     <>
       <button className={styles.addButton} type={'button'} onClick={() => setIsOpen(true)}>
-        <BsPlus />
+        <FiUserPlus />
+        Adicionar usuário
       </button>
-      <Modal
-        className={styles.modalBody}
-        isOpen={isOpen}
-        onRequestClose={() => setIsOpen(false)}
-        overlayClassName={styles.modalOverlay}
-      >
-        <form onSubmit={(e) => handleAddUser(e)} className={styles.form}>
-          <div>
-            <div className={styles.inputContainer}>
-              <label>Nome</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div className={styles.inputContainer}>
-              <label>CPF</label>
-              <input value={cpf} onChange={(e) => setCpf(e.target.value)} />
-            </div>
-            <div className={styles.inputContainer}>
-              <label>Idade</label>
-              <input value={age} onChange={(e) => setAge(Number(e.target.value))} />
-            </div>
-          </div>
-
-          <div>
-            <div className={styles.inputContainer}>
-              <label>Telefone</label>
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} />
-            </div>
-            <div className={styles.inputContainer}>
-              <label>Email</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} />
-            </div>
-            <button type="submit">Adiconar usuário</button>
-          </div>
-        </form>
-      </Modal>
     </>
   );
 }

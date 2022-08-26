@@ -8,10 +8,12 @@
   align-items: center;
   flex-direction: column;
 
-  main {
-    h1 {
-      font-size: 2.5rem;
-    }
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+
+    width: calc(850px + 5rem);
+    margin-bottom: 1rem;
   }
 }
 

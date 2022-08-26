@@ -1,7 +1,12 @@
-.userstable {
+.usersTable {
   padding: 1.25rem 3rem;
   background-color: var(--clear-blue);
   border-radius: 1rem;
+
+  .tableOptions {
+    display: flex;
+    justify-content: space-between;
+  }
 
   table {
     width: 850px;

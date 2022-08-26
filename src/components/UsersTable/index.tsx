@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { UserProps } from '../../hook/useUsers';
+import { AddUserButton } from '../AddUserButton';
 import { Checkbox } from '../Checkbox';
+import { FilterBar } from '../FilterBar';
 import styles from './styles.module.scss';
 
 interface UsersTableProps {
@@ -53,7 +55,11 @@ export function UsersTable({ users }: UsersTableProps) {
   }, [users]);
 
   return (
-    <div className={styles.userstable}>
+    <div className={styles.usersTable}>
+      <div className={styles.tableOptions}>
+        <FilterBar />
+        <AddUserButton />
+      </div>
       <table>
         <thead>
           <tr>
