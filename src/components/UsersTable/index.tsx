@@ -1,36 +1,56 @@
 import { useEffect, useState } from 'react';
 import { UserProps } from '../../hook/useUsers';
-import { AddUserButton } from '../AddUserButton';
 import { Checkbox } from '../Checkbox';
 import styles from './styles.module.scss';
 
 interface UsersTableProps {
-  items: {
-    checked: boolean;
-    user: UserProps;
-  }[];
+  users: UserProps[];
 }
 
-export function UsersTable({ items }: UsersTableProps) {
-  function handleActive(i: number) {
-    items[i].checked = true;
+interface UserWithCheckedProp extends UserProps {
+  checked: boolean;
+}
+
+export function UsersTable({ users }: UsersTableProps) {
+  const [usersWithChecked, setUserWithChecked] = useState<UserWithCheckedProp[]>([]);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+
+  function handleToggleSelectAll() {
+    const newUserList = usersWithChecked.map((user) => {
+      const updatedObj = {
+        ...user,
+        checked: !isAllChecked,
+      };
+      return updatedObj;
+    });
+
+    setIsAllChecked(!isAllChecked);
+    setUserWithChecked(newUserList);
   }
 
-  function handleInactive(i: number) {
-    items[i].checked = false;
+  function handleToggleChecked(id: string) {
+    setUserWithChecked((prevState) => {
+      const newList = prevState.map((user) => {
+        let updatedUser: UserWithCheckedProp;
+
+        user.id === id ? (updatedUser = { ...user, checked: !user.checked }) : (updatedUser = user);
+
+        return updatedUser;
+      });
+      return newList;
+    });
   }
 
-  function handleActiveAll() {
-    const checkboxs: NodeListOf<HTMLDListElement> = document.querySelectorAll('.checkbox div');
-
-    checkboxs.forEach((el) => el.toggleAttribute('active', true));
-  }
-
-  function handleInactiveAll() {
-    const checkboxs: NodeListOf<HTMLDListElement> = document.querySelectorAll('.checkbox div');
-
-    checkboxs.forEach((el) => el.toggleAttribute('active', false));
-  }
+  useEffect(() => {
+    const usersWithCheckProp: UserWithCheckedProp[] = users.map<UserWithCheckedProp>((user) => {
+      const newObj = {
+        ...user,
+        checked: false,
+      };
+      return newObj;
+    });
+    setUserWithChecked(usersWithCheckProp);
+  }, [users]);
 
   return (
     <div className={styles.userstable}>
@@ -38,13 +58,7 @@ export function UsersTable({ items }: UsersTableProps) {
         <thead>
           <tr>
             <th>
-              <Checkbox
-                isActive={false}
-                onActive={() => handleActiveAll()}
-                onInactive={() => {
-                  handleInactiveAll();
-                }}
-              />
+              <Checkbox onClick={() => handleToggleSelectAll()} isChecked={isAllChecked} />
             </th>
             <th>ID</th>
             <th>Nome</th>
@@ -55,22 +69,18 @@ export function UsersTable({ items }: UsersTableProps) {
           </tr>
         </thead>
         <tbody>
-          {items.map((item, i) => {
+          {usersWithChecked.map((user, i) => {
             return (
-              <tr key={item.user.id}>
+              <tr key={user.id}>
                 <td className="checkbox">
-                  <Checkbox
-                    isActive={item.checked}
-                    onActive={() => handleActive(i)}
-                    onInactive={() => handleInactive(i)}
-                  />
+                  <Checkbox isChecked={user.checked} onClick={() => handleToggleChecked(user.id)} />
                 </td>
-                <td>{item.user.id}</td>
-                <td>{item.user.name}</td>
-                <td>{item.user.cpf}</td>
-                <td>{item.user.age}</td>
-                <td>{item.user.phone}</td>
-                <td>{item.user.email}</td>
+                <td>{user.id}</td>
+                <td>{user.name}</td>
+                <td>{user.cpf}</td>
+                <td>{user.age}</td>
+                <td>{user.phone}</td>
+                <td>{user.email}</td>
               </tr>
             );
           })}

@@ -1,29 +1,18 @@
-import { useEffect, useState } from 'react';
 import { FaCheck } from 'react-icons/fa';
 
 import styles from './styles.module.scss';
 
-interface ICheckbox {
-  isActive: boolean;
-  onActive?(): void;
-  onInactive?(): void;
+interface CheckboxProps {
+  isChecked?: boolean;
+  onClick(): void;
 }
 
-export function Checkbox({ onActive = () => {}, onInactive = () => {}, isActive }: ICheckbox) {
-  function handleInactive() {
-    onInactive();
-  }
-
-  function handleActive() {
-    console.log(isActive);
-    onActive();
-  }
-
-  return isActive ? (
-    <div onClick={() => handleInactive()} className={styles.active}>
+export function Checkbox({ isChecked = false, onClick }: CheckboxProps) {
+  return isChecked ? (
+    <div onClick={() => onClick()} className={styles.active}>
       <FaCheck />
     </div>
   ) : (
-    <div onClick={() => handleActive()} className={styles.inactive} />
+    <div onClick={() => onClick()} className={styles.inactive} />
   );
 }
